@@ -1,0 +1,10 @@
+{
+	"reset": {
+		"css": "/dist/reset.css",
+		"js": "/dist/reset.js"
+	},
+	"main": {
+		"css": "/dist/main.css",
+		"js": "/dist/main.js"
+	}
+}

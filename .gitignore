@@ -1,0 +1,6 @@
+.idea
+bin/tasks/tmp/**
+node_modules
+/static/dist/
+/reports
+npm-debug.log

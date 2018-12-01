@@ -1,0 +1,5 @@
+{
+	"apiRequestTimeout": 5000,
+	"maxContentLength": 1,
+	"defaultLang": "ru_RU"
+}
