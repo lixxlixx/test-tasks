@@ -4,6 +4,7 @@ import ImmPropTypes               from 'react-immutable-proptypes';
 import { withNamespaces }         from 'react-i18next';
 import styles                     from './index.less';
 
+
 @withNamespaces()
 class Ticket extends PureComponent {
 	
@@ -19,6 +20,7 @@ class Ticket extends PureComponent {
 	static defaultProps = {
 		t: () => {},
 	};
+	
 	
 	render() {
 		const { ticket, t } = this.props;

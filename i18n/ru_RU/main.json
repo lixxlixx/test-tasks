@@ -1,6 +1,10 @@
 {
 	"tickets count": "{{count}} [[{{count}}|билет|билета|билетов]]",
 	"ticket": "Билет",
+	"transfers count": "Количество пересадок",
+	"all transfers": "Все",
 	"amount of transfers": "{{transfers}} [[{{transfers}}|пересадка|пересадки|пересадок]]",
-	"without transfers": "Без пересадок"
+	"without transfers": "Без пересадок",
+	"currency": "Валюта",
+	"only": "Только"
 }

@@ -1,12 +1,34 @@
-import { connect }             from 'react-redux';
-import Component               from '../components';
-import { load }                from '../actions';
-import { getTickets, getLoading } from '../selectors';
+import { connect } from 'react-redux';
+import Component   from '../components';
+import { load }    from '../actions';
+import {
+	setTransferFilter,
+	setTransferFilterOnly,
+	applyToAllTransfers
+}                  from '../actions/filters';
+import {
+	getFilteredTickets,
+	getLoading,
+	getAvailableTransfers,
+	getActiveTransfers,
+	
+}                  from '../selectors';
+
 
 const mapStateToProps = state => ({
 	loading: getLoading(state),
-	tickets: getTickets(state)
+	tickets: getFilteredTickets(state),
+	availableTransfers: getAvailableTransfers(state),
+	activeTransfers: getActiveTransfers(state),
 });
 
 
-export default connect(mapStateToProps, { onMount: load })(Component);
+const mapDispatchToProps = {
+	onMount: load,
+	onChangeTransfer: setTransferFilter,
+	onChangeTransferOnly: setTransferFilterOnly,
+	onApplyToAllTransfers: applyToAllTransfers
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);

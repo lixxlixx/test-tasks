@@ -1,11 +1,13 @@
-import React, { PureComponent }   from 'react';
-import PropTypes                  from 'prop-types';
-import ImmPropTypes               from 'react-immutable-proptypes';
-import { withNamespaces }         from 'react-i18next';
-import Ticket                     from 'components/Ticket';
+import React, { PureComponent } from 'react';
+import PropTypes                from 'prop-types';
+import ImmPropTypes             from 'react-immutable-proptypes';
+import { withNamespaces }       from 'react-i18next';
+import Ticket                   from 'components/Ticket';
+import Filter                   from 'components/Filter';
 
 @withNamespaces()
 class TicketsPage extends PureComponent {
+	
 	
 	static propTypes = {
 		loading: PropTypes.bool,
@@ -17,7 +19,12 @@ class TicketsPage extends PureComponent {
 			departure_time: PropTypes.string.isRequired,
 			carrier: PropTypes.string.isRequired
 		})),
+		availableTransfers: ImmPropTypes.orderedSetOf(PropTypes.number),
+		activeTransfers: ImmPropTypes.setOf(PropTypes.number),
 		onMount: PropTypes.func,
+		onChangeTransfer: PropTypes.func,
+		onChangeTransferOnly: PropTypes.func,
+		onApplyToAllTransfers: PropTypes.func,
 		t: PropTypes.func,
 	};
 	
@@ -25,7 +32,12 @@ class TicketsPage extends PureComponent {
 	static defaultProps = {
 		loading: false,
 		tickets: null,
+		availableTransfers: null,
+		activeTransfers: null,
 		onMount: () => {},
+		onChangeTransfer: () => {},
+		onChangeTransferOnly: () => {},
+		onApplyToAllTransfers: () => {},
 		t: () => {},
 	};
 	
@@ -40,9 +52,10 @@ class TicketsPage extends PureComponent {
 			'carrier'
 		];
 		
-		for (const param of uniqueKeyParams ) {
+		for (const param of uniqueKeyParams) {
 			str += item.get(param);
 		}
+		
 		return str;
 	}
 	
@@ -52,8 +65,19 @@ class TicketsPage extends PureComponent {
 	}
 	
 	
+	onCheckChange = (name, value) => this.props.onChangeTransfer(name, value);
+	onCheckOnly = name => this.props.onChangeTransferOnly(name);
+	onCheckAll = value => this.props.onApplyToAllTransfers(value);
+	
+	
 	render() {
-		const { tickets, loading, t } = this.props;
+		const {
+			tickets,
+			availableTransfers,
+			activeTransfers,
+			loading,
+			t
+		} = this.props;
 		
 		return (
 			<div>
@@ -64,6 +88,14 @@ class TicketsPage extends PureComponent {
 					{
 						(tickets && ! loading) &&
 						<div>
+							<Filter
+								availableTransfers={availableTransfers}
+								activeTransfers={activeTransfers}
+								onCheckChange={this.onCheckChange}
+								onCheckOnly={this.onCheckOnly}
+								onCheckAll={this.onCheckAll}
+							/>
+							
 							<h2>{t('tickets count', { count: tickets.count() })}</h2>
 							{tickets.map(ticket => (
 								<Ticket
