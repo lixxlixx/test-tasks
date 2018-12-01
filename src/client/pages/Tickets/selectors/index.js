@@ -14,7 +14,13 @@ export const getLoading = createSelector(
  * Select tickets data
  */
 export const getTickets = createSelector(
-	state => state.ticketsPage.get('tickets'),
+	state => {
+		const tickets = state.ticketsPage.get('tickets');
+		
+		if (tickets) {
+			return tickets.sortBy(ticket => ticket.get('price'));
+		}
+	},
 	data => data
 );
 

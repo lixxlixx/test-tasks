@@ -22,12 +22,21 @@ class Ticket extends PureComponent {
 	
 	render() {
 		const { ticket, t } = this.props;
+		const stops = ticket.get('stops');
 		
 		return (
 			<div className={styles.ticket}>
 				<p>{t('ticket')}</p>
+				<img src={`/img/carriers/${ticket.get('carrier')}.png`} alt="asd" />
 				<span>{ticket.get('origin_name')} – {ticket.get('destination_name')}</span>
 				<b>&nbsp;{ticket.get('price')}</b>
+				<p>
+					{
+						stops
+							? t('amount of transfers', { transfers: ticket.get('stops') })
+							: t('without transfers')
+					}
+				</p>
 			</div>
 		);
 	}

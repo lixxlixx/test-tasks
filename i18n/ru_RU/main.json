@@ -1,4 +1,6 @@
 {
 	"tickets count": "{{count}} [[{{count}}|билет|билета|билетов]]",
-	"ticket": "Билет"
+	"ticket": "Билет",
+	"amount of transfers": "{{transfers}} [[{{transfers}}|пересадка|пересадки|пересадок]]",
+	"without transfers": "Без пересадок"
 }
