@@ -2,6 +2,7 @@ export const SET_ACTIVE_TRANSFERS       = 'PAGES/TICKETS/FILTERS/SET_ACTIVE_TRAN
 export const SET_TRANSFER_ACTIVITY      = 'PAGES/TICKETS/FILTERS/SET_TRANSFER_ACTIVITY';
 export const SET_TRANSFER_ONLY_ACTIVITY = 'PAGES/TICKETS/FILTERS/SET_TRANSFER_ONLY_ACTIVITY';
 export const APPLY_TO_ALL_TRANSFERS     = 'PAGES/TICKETS/FILTERS/APPLY_TO_ALL_TRANSFERS';
+export const SET_CURRENCY               = 'PAGES/TICKETS/FILTERS/SET_CURRENCY';
 
 
 /**
@@ -51,4 +52,16 @@ export const setTransferFilterOnly = transfersCount => ({
 export const applyToAllTransfers = setActive => ({
 	type: APPLY_TO_ALL_TRANSFERS,
 	payload: { setActive }
+});
+
+
+/**
+ * Set filter currency
+ * 
+ * @param currency {string}
+ * @return {{type: string, payload: {currency: string}}}
+ */
+export const setCurrency = currency => ({
+	type: SET_CURRENCY,
+	payload: { currency }
 });

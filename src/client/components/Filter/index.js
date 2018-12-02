@@ -10,21 +10,27 @@ class Filter extends PureComponent {
 	
 	
 	static propTypes = {
+		availableCurrencies: ImmPropTypes.listOf(PropTypes.string),
+		activeCurrency: PropTypes.string,
 		availableTransfers: ImmPropTypes.orderedSetOf(PropTypes.number),
 		activeTransfers: ImmPropTypes.setOf(PropTypes.number),
 		onCheckChange: PropTypes.func,
 		onCheckOnly: PropTypes.func,
 		onCheckAll: PropTypes.func,
+		onSetCurrency: PropTypes.func,
 		t: PropTypes.func,
 	};
 	
 	
 	static defaultProps = {
+		availableCurrencies: null,
+		activeCurrency: 'RUB',
 		availableTransfers: null,
 		activeTransfers: null,
 		onCheckChange: () => {},
 		onCheckOnly: () => {},
 		onCheckAll: () => {},
+		onSetCurrency: () => {},
 		t: () => {},
 	};
 	
@@ -41,18 +47,39 @@ class Filter extends PureComponent {
 	onCheckChange = (name, value) => this.props.onCheckChange(+name, value);
 	onCheckOnly = name => this.props.onCheckOnly(+name);
 	onCheckAll = (name, value) => this.props.onCheckAll(value);
+	onSetCurrency = currency => () => this.props.onSetCurrency(currency);
 	
 	
 	render() {
-		const { availableTransfers, activeTransfers, t } = this.props;
+		const {
+			availableTransfers,
+			activeTransfers,
+			availableCurrencies,
+			activeCurrency,
+			t
+		} = this.props;
 		
 		return (
 			<div className={styles.filter}>
-				<p>{t('transfers count')}</p>
+				
+				<p>{t('currency')}</p>
+				{
+					availableCurrencies.map(currency => (
+						<span key={currency} onClick={this.onSetCurrency(currency)}>
+							{
+								currency === activeCurrency
+									? <b>{currency}</b>
+									: <span>{currency}</span>
+							}
+							&nbsp;
+						</span>
+					))
+				}
 				
 				{
 					(availableTransfers && availableTransfers.count() > 2) &&
 					<div>
+						<p>{t('transfers count')}</p>
 						<Checkbox
 							title={t('all transfers')}
 							key="transfer-all"

@@ -1,20 +1,23 @@
-import { fork, call, takeEvery, put, select }        from 'redux-saga/effects';
-import { get }                                       from 'libs/xhr';
+import { fork, call, takeEvery, put, select, all }    from 'redux-saga/effects';
+import { get }                                        from 'libs/xhr';
+import { load }                                       from 'modules/currency/actions';
+import { getTicketsCurrency, getAvailableCurrencies } from 'modules/config/selectors';
 import {
 	LOAD,
 	add,
 	error,
 	loaded,
 	loading
-}                                                    from '../actions';
+}                                                     from '../actions';
 import {
+	setCurrency,
 	setActiveTransfers,
 	applyToAllTransfers,
 	APPLY_TO_ALL_TRANSFERS,
 	SET_TRANSFER_ACTIVITY,
 	SET_TRANSFER_ONLY_ACTIVITY
-}                                                    from '../actions/filters';
-import { getActiveTransfers, getAvailableTransfers } from '../selectors';
+}                                                     from '../actions/filters';
+import { getActiveTransfers, getAvailableTransfers }  from '../selectors';
 
 
 /**
@@ -85,4 +88,11 @@ export function* transferFilters() {
 export default function* () {
 	yield fork(dataLoading);
 	yield fork(transferFilters);
+	const [defaultTicketsCurrency, available] = yield all([
+		select(getTicketsCurrency),
+		select(getAvailableCurrencies),
+	]);
+	
+	yield put(setCurrency(defaultTicketsCurrency));
+	yield put(load(defaultTicketsCurrency, available));
 }

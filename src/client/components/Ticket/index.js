@@ -13,17 +13,28 @@ class Ticket extends PureComponent {
 			origin_name: PropTypes.string.isRequired,
 			destination_name: PropTypes.string.isRequired
 		}).isRequired,
+		exchangeRate: PropTypes.number,
+		currency: PropTypes.string,
 		t: PropTypes.func,
 	};
 	
 	
 	static defaultProps = {
+		currency: 'RUB',
+		exchangeRate: 1,
 		t: () => {},
 	};
 	
 	
 	render() {
-		const { ticket, t } = this.props;
+		const {
+			ticket,
+			exchangeRate,
+			currency,
+			t
+		} = this.props;
+		
+		
 		const stops = ticket.get('stops');
 		
 		return (
@@ -31,7 +42,7 @@ class Ticket extends PureComponent {
 				<p>{t('ticket')}</p>
 				<img src={`/img/carriers/${ticket.get('carrier')}.png`} alt="asd" />
 				<span>{ticket.get('origin_name')} – {ticket.get('destination_name')}</span>
-				<b>&nbsp;{ticket.get('price')}</b>
+				<b>&nbsp;{Math.round(ticket.get('price') * exchangeRate)} {currency}</b>
 				<p>
 					{
 						stops

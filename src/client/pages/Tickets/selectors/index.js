@@ -79,4 +79,14 @@ export const getFilteredTickets = createSelector(
 );
 
 
+/**
+ * Get filter currency
+ */
+export const getCurrency = createSelector(
+	state => state.ticketsPage.get('filterCurrency'),
+	currency => currency
+);
+
+
+
 export default {};

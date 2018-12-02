@@ -1,11 +1,12 @@
-import { Map, fromJS, Set }     from 'immutable';
-import { LOADING, ADD }         from '../actions';
-import { SET_ACTIVE_TRANSFERS } from '../actions/filters';
+import { Map, fromJS, Set }                   from 'immutable';
+import { LOADING, ADD }                       from '../actions';
+import { SET_ACTIVE_TRANSFERS, SET_CURRENCY } from '../actions/filters';
 
 
 export const initialState = new Map({
 	tickets: null,
 	filteredTransfers: new Set(),
+	filterCurrency: '',
 	loading: false
 });
 
@@ -18,6 +19,8 @@ export function ticketsPage(state = initialState, action) {
 			return state.set('loading', action.payload.isLoading);
 		case SET_ACTIVE_TRANSFERS:
 			return state.set('filteredTransfers', action.payload.transfers);
+		case SET_CURRENCY:
+			return state.set('filterCurrency', action.payload.currency);
 		
 		default:
 			return state;

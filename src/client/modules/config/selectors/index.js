@@ -19,5 +19,17 @@ export const getDefaultLang = createSelector(
 );
 
 
+export const getTicketsCurrency = createSelector(
+	state => state.config.get('ticketsCurrency'),
+	ticketsCurrency => ticketsCurrency,
+);
+
+
+export const getAvailableCurrencies = createSelector(
+	state => state.config.get('availableCurrencies'),
+	availableCurrencies => availableCurrencies,
+);
+
+
 
 export default {};

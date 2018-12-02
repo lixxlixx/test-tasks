@@ -7,6 +7,7 @@ import {
 	all
 }                   from 'redux-saga/effects';
 import mainPageSaga from 'pages/Tickets/sagas';
+import currency     from 'modules/currency/sagas';
 import { add }      from 'modules/config/actions';
 import {
 	getApiMaxContentLength,
@@ -37,4 +38,5 @@ export default function* rootSaga() {
 	yield call(addConfig);
 	yield call(xhrSettings);
 	yield fork(mainPageSaga);
+	yield fork(currency);
 }
