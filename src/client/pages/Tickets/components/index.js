@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes                from 'prop-types';
 import ImmPropTypes             from 'react-immutable-proptypes';
-import { withNamespaces }       from 'react-i18next';
 import Ticket                   from 'components/Ticket';
 import Filter                   from 'components/Filter';
+import Logo                     from 'components/Logo';
+import EmptyState               from './EmptyState';
+import styles                   from '../styles/index.less';
 
-@withNamespaces()
+
 class TicketsPage extends PureComponent {
 	
 	
@@ -21,6 +23,7 @@ class TicketsPage extends PureComponent {
 		})),
 		availableTransfers: ImmPropTypes.orderedSetOf(PropTypes.number),
 		activeTransfers: ImmPropTypes.setOf(PropTypes.number),
+		totalCount: PropTypes.number,
 		exchangeRate: PropTypes.number,
 		availableCurrencies: ImmPropTypes.listOf(PropTypes.string),
 		filterCurrency: PropTypes.string,
@@ -28,8 +31,7 @@ class TicketsPage extends PureComponent {
 		onMount: PropTypes.func,
 		onChangeTransfer: PropTypes.func,
 		onChangeTransferOnly: PropTypes.func,
-		onApplyToAllTransfers: PropTypes.func,
-		t: PropTypes.func,
+		onApplyToAllTransfers: PropTypes.func
 	};
 	
 	
@@ -38,6 +40,7 @@ class TicketsPage extends PureComponent {
 		tickets: null,
 		availableTransfers: null,
 		activeTransfers: null,
+		totalCount: 0,
 		exchangeRate: 1,
 		availableCurrencies: null,
 		filterCurrency: 'RUB',
@@ -45,8 +48,7 @@ class TicketsPage extends PureComponent {
 		onMount: () => {},
 		onChangeTransfer: () => {},
 		onChangeTransferOnly: () => {},
-		onApplyToAllTransfers: () => {},
-		t: () => {},
+		onApplyToAllTransfers: () => {}
 	};
 	
 	
@@ -77,6 +79,7 @@ class TicketsPage extends PureComponent {
 	onCheckOnly = name => this.props.onChangeTransferOnly(name);
 	onCheckAll = value => this.props.onApplyToAllTransfers(value);
 	onSetCurrency = currency => this.props.onSetCurrency(currency);
+	onResetFilters = () => this.props.onApplyToAllTransfers(true);
 	
 	
 	render() {
@@ -88,18 +91,18 @@ class TicketsPage extends PureComponent {
 			exchangeRate,
 			availableCurrencies,
 			filterCurrency,
-			t
+			totalCount
 		} = this.props;
 		
 		return (
 			<div>
-				<div>
-					{
-						loading && <span>loading...</span>
-					}
-					{
-						(tickets && ! loading) &&
-						<div>
+				<div className={styles.logo}>
+					<Logo loading={loading} />
+				</div>
+				{
+					(tickets && ! loading) &&
+					<div className={styles.layout}>
+						<div className={styles.filter}>
 							<Filter
 								availableCurrencies={availableCurrencies}
 								activeCurrency={filterCurrency}
@@ -110,20 +113,33 @@ class TicketsPage extends PureComponent {
 								onCheckAll={this.onCheckAll}
 								onSetCurrency={this.onSetCurrency}
 							/>
-							
-							<h2>{t('tickets count', { count: tickets.count() })}</h2>
-							{tickets.map(ticket => (
-								<Ticket
-									currency={filterCurrency}
-									exchangeRate={exchangeRate}
-									key={TicketsPage.createUniqueTicketKey(ticket)}
-									ticket={ticket}
-								/>
-							))}
 						</div>
 						
-					}
-				</div>
+						<div className={styles.tickets}>
+							{tickets.map(ticket => (
+								<div
+									className={styles.ticket}
+									key={TicketsPage.createUniqueTicketKey(ticket)}
+								>
+									<Ticket
+										currency={filterCurrency}
+										exchangeRate={exchangeRate}
+										ticket={ticket}
+									/>
+								</div>
+							))}
+							{
+								! tickets.count() &&
+								<EmptyState
+									totalCount={totalCount}
+									onReset={this.onResetFilters}
+								/>
+							}
+						</div>
+						
+					</div>
+					
+				}
 			</div>
 		);
 	}

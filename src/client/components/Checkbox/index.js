@@ -42,9 +42,19 @@ class Checkbox extends PureComponent {
 		} = this.props;
 		
 		return (
-			<div>
-				<input type="checkbox" checked={checked} name={name} onChange={this.onChange} />
-				<span>{title}</span>
+			<div className={styles.container} >
+				<label className={styles.label} htmlFor={name}>
+					<input
+						className={styles.input}
+						type="checkbox"
+						checked={checked}
+						name={name}
+						id={name}
+						onChange={this.onChange}
+					/>
+					<span className={styles.fakeInput} />
+					<span>{title}</span>
+				</label>
 				{
 					only &&
 					<span className={styles.only} onClick={this.onCheckOnly}>{t('only')}</span>

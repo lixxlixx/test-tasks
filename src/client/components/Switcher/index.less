@@ -1,0 +1,42 @@
+@import (reference) "~styles/config";
+
+.switcher {
+	display: flex;
+}
+
+.btn {
+	border: 1px solid @lightGray;
+	color: @blue;
+	cursor: pointer;
+	font: 12px @baseFont;
+	margin: 0 -0.5px;
+	padding: 8px;
+	text-align: center;
+	text-transform: uppercase;
+	width: 100%;
+	
+	.animation(~'background, border, color');
+	
+	&:hover {
+		border-color: fade(@blue, 40%);
+		background: @lightBlue;
+		z-index: 1;
+	}
+	
+	&:first-child {
+		border-radius: @rhythm 0 0 @rhythm;
+	}
+	
+	&:last-child {
+		border-radius: 0 @rhythm @rhythm 0;
+	}
+	
+}
+
+.active {
+	background: @blue !important;
+	border-color: @blue;
+	color: @white;
+	z-index: 1;
+}
+

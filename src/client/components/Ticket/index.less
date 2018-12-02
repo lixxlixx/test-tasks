@@ -1,6 +1,148 @@
-@import "~styles/config";
+@import (reference) "~styles/config";
+
+@vPadding: 5 * @rhythm;
+@gPadding: 4 * @rhythm;
+
 
 .ticket {
-	border: 1px solid @orange;
+	display: flex;
+	
+	.panel(@vPadding @gPadding);
+}
+
+
+.price {
+	border-right: 1px solid @lightGray;
+	margin: -@vPadding 0;
+	padding: @vPadding 0;
+	padding-right: @gPadding;
+	width: 180px;
+}
+
+.logo {
+	display: block;
+	
+	margin: 0 auto;
+}
+
+.btn {
+	margin-top: @gridMargin;
+	
+	.btn
+}
+
+.mobilePrice {
+	color: @orange;
+	display: none;
+	font: 20px @baseFont;
+}
+
+
+.tripInfo {
+	flex: 1 0;
+	margin-left: @gPadding;
+	position: relative;
+	width: 100%;
+}
+
+.trip {
+	display: flex;
+}
+
+.departure {
+	flex: 1;
+}
+
+.arrival {
+	text-align: right;
+	flex: 1;
+}
+
+.inroute {
+	border-bottom: 1px solid @lightGray;
+	font: @baseFontSize @baseFont;
+	height: 20px;
+	margin: 0 5px;
+	text-align: center;
+	text-transform: uppercase;
+	
+	position: absolute;
+	top: 0; left: 5rem;
+	right: 5rem;
+}
+
+.airplane {
+	background: url("./airplane.png") no-repeat;
+	display: inline-block;
+	height: 13px;
+	width: 13px;
+	
+	position: absolute;
+	bottom: -7px; right: 0;
+}
+
+.transfersText {
+	color: @gray;
+	margin-top: -10px;
+	white-space: nowrap;
+	width: 100%;
+	
+	position: absolute;
+}
+
+.time {
+	color: @dark;
+	font: 32px @baseFont;
+}
+
+.airport {
+	color: @dark;
+	font: @baseFontSize @baseFont;
+	white-space: nowrap;
+}
+
+.date {
+	color: @gray;
+	font: @baseFontSize @baseFont;
+	margin-top: 2px;
+}
+
+@media (max-width: @screen-sm) {
+	
+	.ticket {
+		cursor: pointer;
+		flex-direction: column;
+	}
+	
+	.price {
+		border: none;
+		height: 100px;
+		width: 100%;
+	
+		position: relative;
+	}
+	
+	.btn {
+		display: none;
+	}
+	
+	.logo {
+		text-align: right;
+		width: 70px;
+		
+		position: absolute;
+		top: 2 * @rhythm; right: 0;
+	}
+	
+	.mobilePrice {
+		display: block;
+		
+		position: absolute;
+		top: 2 * @rhythm; left: 0;
+	}
+	
+	.tripInfo {
+		margin: 2 * @rhythm 0 0;
+	}
 }
 

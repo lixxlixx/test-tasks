@@ -1,1 +1,68 @@
-@orange: #ff7c29;
+/* COLORS */
+@orange     : #FF6D00;
+@grayBlue   : #F3F7FA;
+@gray       : #8B9497;
+@lightGray  : #ECEFF1;
+@white      : #FFF;
+@dark       : #4A4A4A;
+
+@blue       : #2196F3;
+@lightBlue  : #F1FCFF;
+
+/* SCREEN BREAK POINTS */
+@screen-sm  : 550px;
+@screen-md  : 720px;
+@screen-lg  : 818px;
+
+
+/* GRID */
+@rhythm : 5px;
+@gridMargin : 3 * @rhythm;
+
+
+/* TYPO */
+@baseFont       : Arial;
+@baseFontSize   : 12px;
+
+
+/* -- ANIMATION STYLE -- */
+@animationStyle: cubic-bezier(0.23, 1, 0.32, 1);
+@animationTime: 0.5s;
+
+.animation(@property: all, @duration: @animationTime, @timing: @animationStyle){
+	-webkit-transition-property: @property;
+	transition-property: @property;
+	-webkit-transition-duration: @duration;
+	transition-duration: @duration;
+	-webkit-transition-timing-function: @timing;
+	transition-timing-function: @timing;
+}
+
+
+/* MIXINS */
+.panel(@paddings: @gridMargin) {
+	background: @white;
+	padding: @paddings;
+	border-radius: @rhythm;
+	
+	box-shadow: 0 1px 4px 0 fade(#5B89A4, 25%);
+}
+
+.btn {
+	border-radius: @rhythm;
+	color: @white;
+	cursor: pointer;
+	text-align: center;
+	font-size: 16px @baseFont;
+	padding: 2 * @rhythm 6 * @rhythm;
+	box-shadow: 0 1px 0 0 darken(@orange, 10%), 0 2px 1px 0 fade(#5B89A4, 25%);
+	background: @orange;
+	
+	.animation(~'background, box-shadow');
+	
+	&:hover {
+		background: lighten(@orange, 5%);
+		box-shadow: 0 1px 0 0 darken(@orange, 5%), 0 2px 7px 0 fade(#5B89A4, 25%);
+	}
+}
+

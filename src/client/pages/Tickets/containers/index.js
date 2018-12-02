@@ -18,12 +18,14 @@ import {
 	getAvailableTransfers,
 	getActiveTransfers,
 	getCurrency,
+	getTickets
 }                          from '../selectors';
 
 
 const mapStateToProps = state => {
 	const filterCurrency = getCurrency(state);
 	const ticketsCurrency = getTicketsCurrency(state);
+	const totalTickets = getTickets(state);
 	
 	
 	return {
@@ -33,6 +35,7 @@ const mapStateToProps = state => {
 		exchangeRate: getExchangeRate(state, ticketsCurrency, filterCurrency),
 		availableTransfers: getAvailableTransfers(state),
 		activeTransfers: getActiveTransfers(state),
+		totalCount: totalTickets ? totalTickets.count() : 0,
 		filterCurrency
 	};
 };

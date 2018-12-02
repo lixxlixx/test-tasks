@@ -1,7 +1,7 @@
 {
 	"apiRequestTimeout": 5000,
 	"maxContentLength": 1,
-	"defaultLang": "ru_RU",
+	"defaultLang": "en_EN",
 	"ticketsCurrency": "RUB",
 	"availableCurrencies": ["RUB", "USD", "EUR"]
 }

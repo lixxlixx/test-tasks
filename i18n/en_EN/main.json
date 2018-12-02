@@ -1,4 +1,13 @@
 {
 	"tickets count": "{{count}} [[{{count}}|ticket|tickets]]",
-	"ticket": "Ticket"
+	"ticket": "Ticket",
+	"transfers count": "Numbers of stops",
+	"all transfers": "All",
+	"amount of transfers": "{{transfers}} [[{{transfers}}|stop|stops]]",
+	"without transfers": "without stops",
+	"currency": "Currency",
+	"only": "Only",
+	"no filters result": "We've picked out {{count}} [[{{count}}|flight|flights]]. There were no tickets that matched your filter settings.",
+	"go to filters": "Select “Reset the filters” to see more of the tickets we found.",
+	"reset filters": "Reset the filters"
 }

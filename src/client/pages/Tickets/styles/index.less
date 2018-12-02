@@ -1,0 +1,57 @@
+@import (reference) "~styles/config";
+
+
+body {
+	background: @grayBlue;
+}
+
+
+.logo {
+	margin: 10px auto 0;
+	text-align: center;
+}
+
+
+.layout {
+	display: flex;
+	max-width: @screen-lg;
+	margin: 0 auto;
+	width: 100%;
+}
+
+
+.filter {
+	margin: @gridMargin @gridMargin 0;
+}
+
+
+.tickets {
+	margin: 0 @gridMargin;
+}
+
+.ticket {
+	margin-top: @gridMargin;
+}
+
+
+@media (min-width: @screen-md + 1px) {
+	
+	.filter {
+		max-width: 230px;
+		width: 100%;
+	}
+	
+	.tickets {
+		width: 100%;
+	}
+	
+}
+
+
+@media (max-width: @screen-md) {
+	
+	.layout {
+		flex-direction: column;
+	}
+}
+

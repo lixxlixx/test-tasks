@@ -1,6 +1,20 @@
-@import "~styles/config";
+@import (reference) "~styles/config";
 
 .filter {
-	border: 1px solid @orange;
+	.panel
+}
+
+.title {
+	color: @dark;
+	font: @baseFontSize @baseFont;
+	text-transform: uppercase;
+}
+
+.switcher {
+	margin: @gridMargin 0 @gridMargin * 2;
+}
+
+.checkboxes {
+	margin: 2 * @rhythm -@gridMargin;
 }
 

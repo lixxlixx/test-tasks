@@ -8,7 +8,9 @@ import rootReducer                     from 'reducers/rootMain';
 import { I18nextProvider }             from 'react-i18next';
 import { getDefaultLang }              from 'modules/config/selectors';
 import i18n                            from 'libs/i18n';
+import moment                          from 'moment';
 import createStore, { updateSagaTask } from 'store';
+
 
 
 let store;
@@ -20,6 +22,7 @@ if ( env !== 'production' ) { // eslint-disable-line
 }
 
 const lng = getDefaultLang(store.getState());
+moment.locale(lng);
 
 render(
 	<Provider store={store}>
